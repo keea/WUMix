@@ -8,7 +8,7 @@ var HandLandmarker = {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
         }});
         hands.setOptions({
-            maxNumHands: 2,
+            maxNumHands: 1,
             modelComplexity: 1,
             minDetectionConfidence: 0.5,
             minTrackingConfidence: 0.5
@@ -16,6 +16,7 @@ var HandLandmarker = {
 
         hands.onResults((result) => {
             if (result.multiHandLandmarks) {
+                console.log(result);
                 var landmarks = JSON.stringify(result.multiHandLandmarks);
                 if (landmarks == undefined) return;
 

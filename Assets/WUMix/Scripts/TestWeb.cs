@@ -1,4 +1,7 @@
 using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 public class TestWeb : MonoBehaviour
 {
@@ -10,6 +13,14 @@ public class TestWeb : MonoBehaviour
 
     public void OnLandmarksUpdate(string multiHandLandmarks, int width, int height)
     {
-        Debug.Log("OnLandmarksUpdate : " + multiHandLandmarks);
+        var pointArrays = JsonConvert.DeserializeObject<List<List<Landmark>>>(multiHandLandmarks);
+        
+        foreach (var pointList in pointArrays)
+        {
+            foreach (var point in pointList)
+            {
+                Debug.Log($"Landmark: x={point.x}, y={point.y}, z={point.z}");
+            }
+        }
     }
 }
